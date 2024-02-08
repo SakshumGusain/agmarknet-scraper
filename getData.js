@@ -40,7 +40,7 @@ const storeCSV = (data, date) => {
   
     let dataArray = [];
   
-    const sql = `SELECT * FROM commodities WHERE arrival_date = ?`;
+    const sql = `SELECT * FROM CommodityTable WHERE arrival_date = ?`;
   
     try {
       const rows = await new Promise((resolve, reject) => {
