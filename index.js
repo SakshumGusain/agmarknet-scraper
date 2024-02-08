@@ -1,6 +1,6 @@
 
-const cheerio = require("cheerio");
-const axios = require("axios");
+import cheerio from "cheerio";
+import axios from "axios";
 
 async function performScraping() {
   const result = await axios.request({

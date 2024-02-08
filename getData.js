@@ -1,0 +1,71 @@
+import * as readline from "node:readline/promises";
+import { stdin as input, stdout as output } from "node:process";
+
+import fs from "fs";
+import sqlite3 from "sqlite3";
+
+const db = new sqlite3.Database("./API.db", sqlite3.OPEN_READWRITE, (err) => {
+    if (err) console.log(err);
+  });
+
+takeInput();
+
+// function for getting data.csv file from the date the database is created i.e. 06/02/2024
+const storeCSV = (data, date) => {
+    let newDate = "";
+    for (let i = 0; i < date.length; i++) {
+      if (date[i] === "/") newDate = newDate + "-";
+      else newDate = newDate + date[i];
+    }
+  
+    const main = data.map((record) => {
+      return Object.values(record).toString();
+    });
+  
+    const csv = [...main].join("\n");
+  
+    const filePath = `./${newDate}-data.csv`;
+  
+    fs.writeFileSync(filePath, csv);
+  };
+  
+  // function to take date input and then getting the all the data for that date from database and then making a .csv file of for that particular date
+ 
+  async function takeInput() {
+    const rl = readline.createInterface({ input, output });
+  
+    const date = await rl.question("Enter date(DD/MM/YYYY): ");
+  
+    rl.close();
+  
+    let dataArray = [];
+  
+    const sql = `SELECT * FROM commodities WHERE arrival_date = ?`;
+  
+    try {
+      const rows = await new Promise((resolve, reject) => {
+        db.all(sql, date, (err, rows) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(rows);
+          }
+        });
+      });
+  
+      dataArray = rows;
+    } catch (err) {
+      console.error(err.message);
+    } finally {
+      db.close();
+    }
+  
+    storeCSV(dataArray, date);
+  
+    db.close((err) => {
+      if (err) {
+        console.error(err.message);
+      }
+      console.log("Closed the database connection.");
+    });
+  }
