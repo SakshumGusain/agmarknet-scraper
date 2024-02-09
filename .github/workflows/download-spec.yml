@@ -10,7 +10,7 @@ jobs:
 
     strategy: 
       matrix: 
-        node-version: [16.x]
+        node-version: [18.x]
 
     permissions:
         # Give the default GITHUB_TOKEN write permission to commit and push the
