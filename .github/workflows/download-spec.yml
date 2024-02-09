@@ -26,9 +26,9 @@ jobs:
           run: npm install
 
         - name: Run the script
-          run: console.log(process.env.COMMODITIES_API_KEY)
           env: 
             COMMODITIES_API_KEY=${{secrets.COMMODITIES_API_KEY}}
+          run: console.log(process.env.COMMODITIES_API_KEY)
 
         - name: Commit and Push
           uses: stefanzweifel/git-auto-commit-action@v5
