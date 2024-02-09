@@ -55,7 +55,7 @@ for(let i=0 ; i < stateData.states.length ; i++) {
                   data.records !== null &&
                   data.records != undefined
                 ) {
-                  // console.log(data.records)
+                  console.log(data.records)
                   createTable(data)
                   insertRows(db, data);
                 }

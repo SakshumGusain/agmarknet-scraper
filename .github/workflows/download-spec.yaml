@@ -27,7 +27,7 @@ jobs:
           run: npm install
 
         - name: Run the script
-          run: node commoditiesAPI.js
+          run: console.log(process.env.COMMODITIES_API_KEY)
           env: 
             COMMODITIES_API_KEY=${{secrets.COMMODITIES_API_KEY}}
 
