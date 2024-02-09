@@ -1,5 +1,4 @@
-import dotenv from "dotenv";
-dotenv.config();
+import './load-env.js'
 
 import sqlite3 from "sqlite3";
 
@@ -55,6 +54,7 @@ for(let i=0 ; i < stateData.states.length ; i++) {
                   data.records !== null &&
                   data.records != undefined
                 ) {
+                  // console.log(data.records)
                   createTable(data)
                   insertRows(db, data);
                 }

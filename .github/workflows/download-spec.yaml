@@ -24,7 +24,12 @@ jobs:
             node-version: '18'
 
         - name: Install Dependencies
-          run: npm install
+          run: |
+            npm install
+            npm install dotenv
+
+        - name: Load Environment Variables
+          run: node load-env.js
 
         - name: Run the script
           run: node commoditiesAPI.js
