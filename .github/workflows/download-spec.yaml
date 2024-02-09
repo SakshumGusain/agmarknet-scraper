@@ -1,9 +1,8 @@
 name: Updating Database
 
 on:
-  schedule:
-    - cron: '0 8 * * *' # Runs every day at 8AM
-  workflow_dispatch:
+  push: 
+    branches: main
 
 jobs:
   download-yaml:
