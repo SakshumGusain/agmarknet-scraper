@@ -1,4 +1,5 @@
-import './load-env.js'
+import dotenv from 'dotenv'
+dotenv.config()
 
 import sqlite3 from "sqlite3";
 

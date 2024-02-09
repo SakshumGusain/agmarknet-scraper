@@ -24,15 +24,12 @@ jobs:
             node-version: '18'
 
         - name: Install Dependencies
-          run: |
-            npm install
-            npm install dotenv
-
-        - name: Load Environment Variables
-          run: node load-env.js
+          run: npm install
 
         - name: Run the script
           run: node commoditiesAPI.js
+          env: 
+            COMMODITIES_API_KEY=${{secrets.COMMODITIES_API_KEY}}
 
         - name: Commit and Push
           uses: stefanzweifel/git-auto-commit-action@v5
