@@ -4,8 +4,16 @@ import { stdin as input, stdout as output } from "node:process";
 import fs from "fs";
 import sqlite3 from "sqlite3";
 
+import winston from "winston";
+
+const logger = winston.createLogger({
+  level: process.env.LOG_LEVEL || 'info',
+  format: winston.format.cli(),
+  transports: [new winston.transports.Console()],
+});
+
 const db = new sqlite3.Database("./API.db", sqlite3.OPEN_READWRITE, (err) => {
-    if (err) console.log(err);
+    if (err) logger.error(err);
   });
 
 takeInput();
@@ -55,7 +63,7 @@ const storeCSV = (data, date) => {
   
       dataArray = rows;
     } catch (err) {
-      console.error(err.message);
+      logger.error(err.message);
     } finally {
       db.close();
     }
@@ -64,8 +72,8 @@ const storeCSV = (data, date) => {
   
     db.close((err) => {
       if (err) {
-        console.error(err.message);
+        logger.error(err.message);
       }
-      console.log("Closed the database connection.");
+      logger.info("Closed the database connection.");
     });
   }

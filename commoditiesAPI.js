@@ -1,21 +1,19 @@
-import dotenv from 'dotenv'
-dotenv.config()
-
 import sqlite3 from "sqlite3";
+import {apiKey, apiUrl} from './config.js'
+import stateData from "./masters/states-and-districts.json" assert { type: "json" };
+import winston from "winston";
 
-import commoditiesData from "./commodities.json" assert { type: "json" };
-import stateData from "./states-and-districts.json" assert { type: "json" };
+const logger = winston.createLogger({
+  level: process.env.LOG_LEVEL || 'info',
+  format: winston.format.cli(),
+  transports: [new winston.transports.Console()],
+});
 
 
 // Creating a variable for accessing database
 const db = new sqlite3.Database("./API.db", sqlite3.OPEN_READWRITE, (err) => {
-  if (err) console.log(err);
+  if (err) logger.info(err);
 });
-
-const apiKey = process.env.COMMODITIES_API_KEY;
-const apiUrl =
-  "https://api.data.gov.in/resource/9ef84268-d588-465a-a308-a864a43d0070";
-
 
 
 let delay = 0;
@@ -25,7 +23,6 @@ for(let i=0 ; i < stateData.states.length ; i++) {
       setTimeout(() => {
             let newState = encodeURIComponent(stateData.states[i].state);
             let newDistrict = encodeURIComponent(stateData.states[i].districts[j]);
-            // let newCommodity = encodeURIComponent(commodity);
 
             const queryParams = new URLSearchParams({
               "api-key": apiKey,
@@ -43,7 +40,7 @@ for(let i=0 ; i < stateData.states.length ; i++) {
             })
               .then((response) => {
                 if (!response.ok) {
-                  console.log(response);
+                  logger.error(response);
                   throw new Error();
                 }
                 return response.json();
@@ -56,15 +53,15 @@ for(let i=0 ; i < stateData.states.length ; i++) {
                   data.records !== null &&
                   data.records != undefined
                 ) {
-                  // console.log(data.records.length)
+                  loggger.info(data.records)
                   createTable(data)
                   insertRows(db, data);
                 }
               })
-              .catch((error) => console.error("Error:", error));
-      }, j*1000)
+              .catch((error) => logger.error("Error:", error));
+      }, j*5000)
     }
-  }, delay*1000)
+  }, delay*10000)
   delay = (delay + stateData.states[i].districts.length)
 }
 
