@@ -53,7 +53,7 @@ for(let i=0 ; i < stateData.states.length ; i++) {
                   data.records !== null &&
                   data.records != undefined
                 ) {
-                  loggger.info(data.records)
+                  logger.info(data.records)
                   createTable(data)
                   insertRows(db, data);
                 }
