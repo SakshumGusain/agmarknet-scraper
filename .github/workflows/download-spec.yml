@@ -2,7 +2,7 @@ name: Updating Database
 
 on:
   schedule:
-    - cron: '0 8 * * *' # Runs every day at 8AM
+    - cron: '40 4 * * *' # Runs every day at 8AM
   workflow_dispatch:
 
 jobs:

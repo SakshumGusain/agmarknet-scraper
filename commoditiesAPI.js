@@ -17,6 +17,7 @@ const apiUrl =
   "https://api.data.gov.in/resource/9ef84268-d588-465a-a308-a864a43d0070";
 
 
+
 let delay = 0;
 for(let i=0 ; i < stateData.states.length ; i++) {
     setTimeout(() => {
@@ -55,7 +56,7 @@ for(let i=0 ; i < stateData.states.length ; i++) {
                   data.records !== null &&
                   data.records != undefined
                 ) {
-                  console.log(data.records)
+                  // console.log(data.records.length)
                   createTable(data)
                   insertRows(db, data);
                 }

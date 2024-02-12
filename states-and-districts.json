@@ -132,7 +132,7 @@
          ]
       },
       {  
-         "state":"Chhattisgarh",
+         "state":"Chattisgarh",
          "districts":[  
             "Balod",
             "Baloda Bazar",
@@ -177,7 +177,7 @@
          ]
       },
       {  
-         "state":"Delhi (NCT)",
+         "state":"NCT of Delhi",
          "districts":[  
             "Central Delhi",
             "East Delhi",
@@ -605,7 +605,7 @@
          ]
       },
       {  
-         "state":"Puducherry (UT)",
+         "state":"Pondicherry",
          "districts":[  
             "Karaikal",
             "Mahe",
@@ -774,7 +774,7 @@
          ]
       },
       {  
-         "state":"Uttarakhand",
+         "state":"Uttrakhand",
          "districts":[  
             "Almora",
             "Bageshwar",
