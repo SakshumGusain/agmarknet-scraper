@@ -41,13 +41,9 @@ _Follow these steps to make the project work._
    ```sh
    git clone https://github.com/ChakshuGautam/agmarknet-scraper.git
    ```
-3. Install following NPM packages
+3. Install NPM package
    ```sh
-   npm install axios
-   npm install cheerio
-   npm install dotenv
-   npm install sqlite3
-   npm install winston
+   npm install
    ```
 4. Create a `.env` file and store your API key in that file
    ```js
